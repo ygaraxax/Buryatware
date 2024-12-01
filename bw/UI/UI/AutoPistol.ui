@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>autoPistolWindow</class>
+ <widget class="QWidget" name="autoPistolWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Auto Pistol</string>
+  </property>
+  <widget class="QLabel" name="titlePanel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>300</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(50, 50, 55);
+font: 75 10pt &quot;Arial&quot;;
+font-weight: bold;
+color: rgb(245, 246, 250);
+padding-left: 1px;</string>
+   </property>
+   <property name="text">
+    <string>Auto Pistol</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>0</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+  background-color: rgb(50, 50, 55);
+  border: none;
+}
+
+QPushButton:hover {
+  background-color: rgb(55, 55, 60);
+}
+
+QPushButton:pressed {
+  background-color: rgb(60, 60, 65);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>Image/Close.png</normaloff>Image/Close.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Background">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>300</width>
+     <height>300</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(30, 30, 35)</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="mouseListComboBox">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>45</y>
+     <width>130</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox{
+font: 8pt &quot;Arial&quot;;
+border: none;
+background-color: rgb(30,30,30);
+color: white;
+font-weight: bold;
+border: 1px solid white;
+}
+
+QComboBox::drop-down{
+    border: none;
+    background-color: rgb(100,100,100);
+    font-weight: bold;
+}</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>MOUSE2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>MOUSE3</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>MOUSE4</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>MOUSE5</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="mouseListLable">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>25</y>
+     <width>63</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 10pt &quot;Arial&quot;;
+color: rgb(220, 221, 225);
+font-weight: bold;</string>
+   </property>
+   <property name="text">
+    <string>Mouse list</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <zorder>Background</zorder>
+  <zorder>titlePanel</zorder>
+  <zorder>closeButton</zorder>
+  <zorder>mouseListComboBox</zorder>
+  <zorder>mouseListLable</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

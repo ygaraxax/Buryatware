@@ -1,0 +1,14 @@
+requests
+time
+threading
+win32api
+tkinter
+win32gui
+win32con
+json
+ctypes
+psutil
+QtCore
+QtWidgets
+QtGui
+QColorDialog

@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>visualWindow</class>
+ <widget class="QWidget" name="visualWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Visual</string>
+  </property>
+  <widget class="QLabel" name="titlePanel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>300</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(50, 50, 55);
+font: 75 10pt &quot;Arial&quot;;
+font-weight: bold;
+color: rgb(245, 246, 250);
+padding-left: 1px;</string>
+   </property>
+   <property name="text">
+    <string>Visual</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>0</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+  background-color: rgb(50, 50, 55);
+  border: none;
+}
+
+QPushButton:hover {
+  background-color: rgb(55, 55, 60);
+}
+
+QPushButton:pressed {
+  background-color: rgb(60, 60, 65);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>Image/Close.png</normaloff>Image/Close.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Background">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>300</width>
+     <height>300</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(30, 30, 35)</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="boxESPCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>25</y>
+     <width>78</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QCheckBox {
+color: rgb(241, 242, 246);
+spacing: 5px;
+border: none;
+font: 10pt &quot;Arial&quot;;
+font-weight: bold;
+}
+
+QCheckBox::indicator  {
+width: 13px;
+height: 13px;
+border: 1px solid rgb(255,255,255);
+}
+
+QCheckBox::indicator:unchecked {
+background-color: rgb(40,40,45);
+}
+
+QCheckBox::indicator:unchecked:hover {
+background-color: rgb(45,45,50);
+}
+
+QCheckBox::indicator:checked {
+background-color: rgb(232, 65, 24);
+}
+
+QCheckBox::indicator:checked:hover {
+background-color:  rgb(232, 65, 24);
+}</string>
+   </property>
+   <property name="text">
+    <string>BOX ESP</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="teamCheckCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>45</y>
+     <width>96</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QCheckBox {
+color: rgb(241, 242, 246);
+spacing: 5px;
+border: none;
+font: 10pt &quot;Arial&quot;;
+font-weight: bold;
+}
+
+QCheckBox::indicator  {
+width: 13px;
+height: 13px;
+border: 1px solid rgb(255,255,255);
+}
+
+QCheckBox::indicator:unchecked {
+background-color: rgb(40,40,45);
+}
+
+QCheckBox::indicator:unchecked:hover {
+background-color: rgb(45,45,50);
+}
+
+QCheckBox::indicator:checked {
+background-color: rgb(232, 65, 24);
+}
+
+QCheckBox::indicator:checked:hover {
+background-color:  rgb(232, 65, 24);
+}</string>
+   </property>
+   <property name="text">
+    <string>Team check</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="healthBarCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>65</y>
+     <width>86</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QCheckBox {
+color: rgb(241, 242, 246);
+spacing: 5px;
+border: none;
+font: 10pt &quot;Arial&quot;;
+font-weight: bold;
+}
+
+QCheckBox::indicator  {
+width: 13px;
+height: 13px;
+border: 1px solid rgb(255,255,255);
+}
+
+QCheckBox::indicator:unchecked {
+background-color: rgb(40,40,45);
+}
+
+QCheckBox::indicator:unchecked:hover {
+background-color: rgb(45,45,50);
+}
+
+QCheckBox::indicator:checked {
+background-color: rgb(232, 65, 24);
+}
+
+QCheckBox::indicator:checked:hover {
+background-color:  rgb(232, 65, 24);
+}</string>
+   </property>
+   <property name="text">
+    <string>Health bar</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="weaponCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>85</y>
+     <width>73</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QCheckBox {
+color: rgb(241, 242, 246);
+spacing: 5px;
+border: none;
+font: 10pt &quot;Arial&quot;;
+font-weight: bold;
+}
+
+QCheckBox::indicator  {
+width: 13px;
+height: 13px;
+border: 1px solid rgb(255,255,255);
+}
+
+QCheckBox::indicator:unchecked {
+background-color: rgb(40,40,45);
+}
+
+QCheckBox::indicator:unchecked:hover {
+background-color: rgb(45,45,50);
+}
+
+QCheckBox::indicator:checked {
+background-color: rgb(232, 65, 24);
+}
+
+QCheckBox::indicator:checked:hover {
+background-color:  rgb(232, 65, 24);
+}</string>
+   </property>
+   <property name="text">
+    <string>Weapon</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="lineCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>105</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QCheckBox {
+color: rgb(241, 242, 246);
+spacing: 5px;
+border: none;
+font: 10pt &quot;Arial&quot;;
+font-weight: bold;
+}
+
+QCheckBox::indicator  {
+width: 13px;
+height: 13px;
+border: 1px solid rgb(255,255,255);
+}
+
+QCheckBox::indicator:unchecked {
+background-color: rgb(40,40,45);
+}
+
+QCheckBox::indicator:unchecked:hover {
+background-color: rgb(45,45,50);
+}
+
+QCheckBox::indicator:checked {
+background-color: rgb(232, 65, 24);
+}
+
+QCheckBox::indicator:checked:hover {
+background-color:  rgb(232, 65, 24);
+}</string>
+   </property>
+   <property name="text">
+    <string>Line</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="crosshairESPCheckBox_2">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>140</y>
+     <width>130</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QCheckBox {
+color: rgb(241, 242, 246);
+spacing: 5px;
+border: none;
+font: 10pt &quot;Arial&quot;;
+font-weight: bold;
+}
+
+QCheckBox::indicator  {
+width: 13px;
+height: 13px;
+border: 1px solid rgb(255,255,255);
+}
+
+QCheckBox::indicator:unchecked {
+background-color: rgb(40,40,45);
+}
+
+QCheckBox::indicator:unchecked:hover {
+background-color: rgb(45,45,50);
+}
+
+QCheckBox::indicator:checked {
+background-color: rgb(232, 65, 24);
+}
+
+QCheckBox::indicator:checked:hover {
+background-color:  rgb(232, 65, 24);
+}</string>
+   </property>
+   <property name="text">
+    <string>Snipers crosshair</string>
+   </property>
+  </widget>
+  <widget class="QSlider" name="sniperCrosshairSlider">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>160</y>
+     <width>130</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QSlider::groove:horizontal {
+height: 8px;
+background: #0097e6;
+}
+
+QSlider::handle:horizontal {
+    background: #1e3799;
+    width: 15px;
+}</string>
+   </property>
+   <property name="minimum">
+    <number>2</number>
+   </property>
+   <property name="maximum">
+    <number>20</number>
+   </property>
+   <property name="value">
+    <number>6</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="sniperCrosshairLable">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>163</y>
+     <width>21</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 10pt &quot;Arial&quot;;
+color: rgb(220, 221, 225);
+font-weight: bold;</string>
+   </property>
+   <property name="text">
+    <string>6</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="BombTimerCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>195</y>
+     <width>94</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QCheckBox {
+color: rgb(241, 242, 246);
+spacing: 5px;
+border: none;
+font: 10pt &quot;Arial&quot;;
+font-weight: bold;
+}
+
+QCheckBox::indicator  {
+width: 13px;
+height: 13px;
+border: 1px solid rgb(255,255,255);
+}
+
+QCheckBox::indicator:unchecked {
+background-color: rgb(40,40,45);
+}
+
+QCheckBox::indicator:unchecked:hover {
+background-color: rgb(45,45,50);
+}
+
+QCheckBox::indicator:checked {
+background-color: rgb(232, 65, 24);
+}
+
+QCheckBox::indicator:checked:hover {
+background-color:  rgb(232, 65, 24);
+}</string>
+   </property>
+   <property name="text">
+    <string>Bomb timer</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boxESPColorEdit">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>25</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border: none;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lineColorEdit">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>105</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border: none;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="sniperCorsshairColorEdit">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>135</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border: none;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>Background</zorder>
+  <zorder>titlePanel</zorder>
+  <zorder>closeButton</zorder>
+  <zorder>boxESPCheckBox</zorder>
+  <zorder>teamCheckCheckBox</zorder>
+  <zorder>healthBarCheckBox</zorder>
+  <zorder>weaponCheckBox</zorder>
+  <zorder>lineCheckBox</zorder>
+  <zorder>crosshairESPCheckBox_2</zorder>
+  <zorder>sniperCrosshairSlider</zorder>
+  <zorder>sniperCrosshairLable</zorder>
+  <zorder>BombTimerCheckBox</zorder>
+  <zorder>boxESPColorEdit</zorder>
+  <zorder>lineColorEdit</zorder>
+  <zorder>sniperCorsshairColorEdit</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
