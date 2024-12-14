@@ -6,38 +6,37 @@ from win32event import *
 from Tool.Process import *
 
 
-class Memory():
-    class Read():
-        def longlong(Address):
-            Buffer = c_longlong()
-            windll.kernel32.ReadProcessMemory(Game.Process, ctypes.c_void_p(Address), byref(Buffer), sizeof(Buffer), 0)
+class Memory:
+    class Read:
+        # Helper method to avoid code duplication in read operations
+        @staticmethod
+        def _read_memory(address, buffer_type):
+            buffer = buffer_type()
+            windll.kernel32.ReadProcessMemory(
+                Game.Process,
+                ctypes.c_void_p(address), 
+                byref(buffer),
+                sizeof(buffer),
+                0
+            )
+            return buffer.value
 
-            return Buffer.value
-        
+        @staticmethod
+        def longlong(address):
+            return Memory.Read._read_memory(address, c_longlong)
 
-        def int(Address):
-            Buffer = c_int()
-            windll.kernel32.ReadProcessMemory(Game.Process, ctypes.c_void_p(Address), byref(Buffer), sizeof(Buffer), 0)
+        @staticmethod 
+        def int(address):
+            return Memory.Read._read_memory(address, c_int)
 
-            return Buffer.value
+        @staticmethod
+        def float(address):
+            return Memory.Read._read_memory(address, c_float)
 
+        @staticmethod
+        def bool(address):
+            return Memory.Read._read_memory(address, c_bool)
 
-        def float(Address):
-            Buffer = c_float()
-            windll.kernel32.ReadProcessMemory(Game.Process, ctypes.c_void_p(Address), byref(Buffer), sizeof(Buffer), 0)
-
-            return Buffer.value
-
-
-        def bool(Address):
-            Buffer = c_bool()
-            windll.kernel32.ReadProcessMemory(Game.Process, ctypes.c_void_p(Address), byref(Buffer), sizeof(Buffer), 0)
-
-            return Buffer.value
-
-
-        def short(Address):
-            Buffer = c_short()
-            windll.kernel32.ReadProcessMemory(Game.Process, ctypes.c_void_p(Address), byref(Buffer), sizeof(Buffer), 0)
-
-            return Buffer.value
+        @staticmethod
+        def short(address):
+            return Memory.Read._read_memory(address, c_short)
