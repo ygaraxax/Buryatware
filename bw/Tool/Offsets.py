@@ -1,60 +1,78 @@
 import json
 
+# Constants for file paths
+OFFSETS_FILE = "C:\MyOffsets\offsets.json"
+CLIENT_DLL_FILE = "C:\MyOffsets\client_dll.json"
 
-with open("C:\MyOffsets\offsets.json") as File:
-    Json = json.loads(File.read())
+# Load main game offsets
+with open(OFFSETS_FILE) as file:
+    offsets_json = json.loads(file.read())
+    client_dll = offsets_json["client.dll"]
 
-    dwLocalPlayerPawn = Json["client.dll"]["dwLocalPlayerPawn"]
-    dwEntityList = Json["client.dll"]["dwEntityList"]
-    dwViewAngles = Json["client.dll"]["dwViewAngles"]
-    dwViewMatrix = Json["client.dll"]["dwViewMatrix"]
-    dwPlantedC4  = Json["client.dll"]["dwPlantedC4"]
-    dwGameRules  = Json["client.dll"]["dwGameRules"]
+    # Core game offsets
+    dwLocalPlayerPawn = client_dll["dwLocalPlayerPawn"]
+    dwEntityList = client_dll["dwEntityList"] 
+    dwViewAngles = client_dll["dwViewAngles"]
+    dwViewMatrix = client_dll["dwViewMatrix"]
+    dwPlantedC4 = client_dll["dwPlantedC4"]
+    dwGameRules = client_dll["dwGameRules"]
 
+# Load detailed client.dll offsets
+with open(CLIENT_DLL_FILE) as file:
+    client_json = json.loads(file.read())
+    client_classes = client_json["client.dll"]["classes"]
 
-with open("C:\MyOffsets\client_dll.json") as File:
-    Json = json.loads(File.read())
+    # Base entity fields
+    m_iTeamNum = client_classes["C_BaseEntity"]["fields"]["m_iTeamNum"]
+    m_iHealth = client_classes["C_BaseEntity"]["fields"]["m_iHealth"]
+    m_lifeState = client_classes["C_BaseEntity"]["fields"]["m_lifeState"]
+    m_pGameSceneNode = client_classes["C_BaseEntity"]["fields"]["m_pGameSceneNode"]
+    m_fFlags = client_classes["C_BaseEntity"]["fields"]["m_fFlags"]
 
-    m_iTeamNum = Json["client.dll"]["classes"]["C_BaseEntity"]["fields"]["m_iTeamNum"]
-    m_iHealth = Json["client.dll"]["classes"]["C_BaseEntity"]["fields"]["m_iHealth"]
-    m_lifeState = Json["client.dll"]["classes"]["C_BaseEntity"]["fields"]["m_lifeState"]
-    m_pGameSceneNode = Json["client.dll"]["classes"]["C_BaseEntity"]["fields"]["m_pGameSceneNode"]
-    m_fFlags = Json["client.dll"]["classes"]["C_BaseEntity"]["fields"]["m_fFlags"]
+    # Player pawn base fields
+    player_pawn_base = client_classes["C_CSPlayerPawnBase"]["fields"]
+    m_iIDEntIndex = player_pawn_base["m_iIDEntIndex"]
+    m_vecLastClipCameraPos = player_pawn_base["m_vecLastClipCameraPos"]
+    m_angEyeAngles = player_pawn_base["m_angEyeAngles"]
+    m_pClippingWeapon = player_pawn_base["m_pClippingWeapon"]
+    m_flFlashOverlayAlpha = player_pawn_base["m_flFlashOverlayAlpha"]
 
-    m_iIDEntIndex = Json["client.dll"]["classes"]["C_CSPlayerPawnBase"]["fields"]["m_iIDEntIndex"]
-    m_vecLastClipCameraPos = Json["client.dll"]["classes"]["C_CSPlayerPawnBase"]["fields"]["m_vecLastClipCameraPos"]
-    m_angEyeAngles = Json["client.dll"]["classes"]["C_CSPlayerPawnBase"]["fields"]["m_angEyeAngles"]
-    m_pClippingWeapon = Json["client.dll"]["classes"]["C_CSPlayerPawnBase"]["fields"]["m_pClippingWeapon"]
-    m_flFlashOverlayAlpha = Json["client.dll"]["classes"]["C_CSPlayerPawnBase"]["fields"]["m_flFlashOverlayAlpha"]
+    # CS player pawn specific fields
+    player_pawn = client_classes["C_CSPlayerPawn"]["fields"]
+    m_bIsScoped = player_pawn["m_bIsScoped"]
+    m_ArmorValue = player_pawn["m_ArmorValue"]
+    m_iShotsFired = player_pawn["m_iShotsFired"]
+    m_flEmitSoundTime = player_pawn["m_flEmitSoundTime"]
+    m_aimPunchAngle = player_pawn["m_aimPunchAngle"]
+    m_entitySpottedState = player_pawn["m_entitySpottedState"]
 
-    m_bIsScoped = Json["client.dll"]["classes"]["C_CSPlayerPawn"]["fields"]["m_bIsScoped"]
-    m_ArmorValue = Json["client.dll"]["classes"]["C_CSPlayerPawn"]["fields"]["m_ArmorValue"]
-    m_iShotsFired = Json["client.dll"]["classes"]["C_CSPlayerPawn"]["fields"]["m_iShotsFired"]
-    m_flEmitSoundTime = Json["client.dll"]["classes"]["C_CSPlayerPawn"]["fields"]["m_flEmitSoundTime"]
-    m_aimPunchAngle = Json["client.dll"]["classes"]["C_CSPlayerPawn"]["fields"]["m_aimPunchAngle"]
-    m_entitySpottedState = Json["client.dll"]["classes"]["C_CSPlayerPawn"]["fields"]["m_entitySpottedState"]
+    # Economy and item related fields
+    m_iItemDefinitionIndex = client_classes["C_EconItemView"]["fields"]["m_iItemDefinitionIndex"]
+    m_AttributeManager = client_classes["C_EconEntity"]["fields"]["m_AttributeManager"]
 
-    m_iItemDefinitionIndex = Json["client.dll"]["classes"]["C_EconItemView"]["fields"]["m_iItemDefinitionIndex"]
-    m_AttributeManager = Json["client.dll"]["classes"]["C_EconEntity"]["fields"]["m_AttributeManager"]
+    # Base player pawn fields
+    m_vOldOrigin = client_classes["C_BasePlayerPawn"]["fields"]["m_vOldOrigin"]
+    m_pWeaponServices = client_classes["C_BasePlayerPawn"]["fields"]["m_pWeaponServices"]
 
-    m_vOldOrigin = Json["client.dll"]["classes"]["C_BasePlayerPawn"]["fields"]["m_vOldOrigin"]
-    m_pWeaponServices = Json["client.dll"]["classes"]["C_BasePlayerPawn"]["fields"]["m_pWeaponServices"]
+    # Entity spotting fields
+    m_bSpotted = client_classes["EntitySpottedState_t"]["fields"]["m_bSpotted"]
+    m_bSpottedByMask = client_classes["EntitySpottedState_t"]["fields"]["m_bSpottedByMask"]
 
-    m_bSpotted = Json["client.dll"]["classes"]["EntitySpottedState_t"]["fields"]["m_bSpotted"]
-    m_bSpottedByMask = Json["client.dll"]["classes"]["EntitySpottedState_t"]["fields"]["m_bSpottedByMask"]
+    # Scene node fields
+    m_bDormant = client_classes["CGameSceneNode"]["fields"]["m_bDormant"]
+    m_vecAbsOrigin = client_classes["CGameSceneNode"]["fields"]["m_vecAbsOrigin"]
 
-    m_bDormant = Json["client.dll"]["classes"]["CGameSceneNode"]["fields"]["m_bDormant"]
-    m_vecAbsOrigin = Json["client.dll"]["classes"]["CGameSceneNode"]["fields"]["m_vecAbsOrigin"]
+    # C4 bomb fields
+    planted_c4 = client_classes["C_PlantedC4"]["fields"]
+    m_nBombSite = planted_c4["m_nBombSite"]
+    m_bBeingDefused = planted_c4["m_bBeingDefused"]
+    m_flDefuseLength = planted_c4["m_flDefuseLength"]
+    m_flTimerLength = planted_c4["m_flTimerLength"]
 
-    m_nBombSite = Json["client.dll"]["classes"]["C_PlantedC4"]["fields"]["m_nBombSite"]
-    m_bBeingDefused = Json["client.dll"]["classes"]["C_PlantedC4"]["fields"]["m_bBeingDefused"]
-    m_flDefuseLength = Json["client.dll"]["classes"]["C_PlantedC4"]["fields"]["m_flDefuseLength"]
-    m_flTimerLength = Json["client.dll"]["classes"]["C_PlantedC4"]["fields"]["m_flTimerLength"]
-
-    m_hPawn = Json["client.dll"]["classes"]["CBasePlayerController"]["fields"]["m_hPawn"]
-    m_modelState = Json["client.dll"]["classes"]["CSkeletonInstance"]["fields"]["m_modelState"]
-    m_vecViewOffset = Json["client.dll"]["classes"]["C_BaseModelEntity"]["fields"]["m_vecViewOffset"]
-    m_iClip1 = Json["client.dll"]["classes"]["C_BasePlayerWeapon"]["fields"]["m_iClip1"]
-    m_Item = Json["client.dll"]["classes"]["C_AttributeContainer"]["fields"]["m_Item"]
-
-    m_sSanitizedPlayerName = Json["client.dll"]["classes"]["CCSPlayerController"]["fields"]["m_sSanitizedPlayerName"]
+    # Miscellaneous fields
+    m_hPawn = client_classes["CBasePlayerController"]["fields"]["m_hPawn"]
+    m_modelState = client_classes["CSkeletonInstance"]["fields"]["m_modelState"]
+    m_vecViewOffset = client_classes["C_BaseModelEntity"]["fields"]["m_vecViewOffset"]
+    m_iClip1 = client_classes["C_BasePlayerWeapon"]["fields"]["m_iClip1"]
+    m_Item = client_classes["C_AttributeContainer"]["fields"]["m_Item"]
+    m_sSanitizedPlayerName = client_classes["CCSPlayerController"]["fields"]["m_sSanitizedPlayerName"]
