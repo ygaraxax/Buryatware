@@ -13,90 +13,100 @@ from SDK.GameSDK import *
 from SDK.Render import *
 
 
+# Aimbot configuration
 AimBotStatus = False
 AimBotFOVStatus = False
 TeamCheck = True
 
-Bone = 6
-Fov = 90
-Smooth = 1
-VirtualKey = 6
-MaxShot = 5
+# Targeting settings
+Bone = 6  # Default bone target (head)
+Fov = 90  # Field of view for target acquisition
+Smooth = 1  # Mouse movement smoothing
+VirtualKey = 6  # Activation key
+MaxShot = 5  # Maximum shots before reset
 
 AimFOVColor = "#ffffff"
 
 
 def getBestTarget():
-    BestEntity = csEntity(0)
-    OldDistance = -9999
+    """Find the best target within FOV"""
+    best_entity = csEntity(0)
+    best_distance = float('-inf')
+    view_matrix = SDK.getViewMatrix()
 
-    Matrix = SDK.getViewMatrix()
-
-    for Entity in GameVar.EntityList:
-        if (Entity.Valid()):
-            if ((TeamCheck and Entity.getTeam() == GameVar.LocalPlayer.Team) ):
-                continue
+    for entity in GameVar.EntityList:
+        if not entity.Valid() or (TeamCheck and entity.getTeam() == GameVar.LocalPlayer.Team):
+            continue
             
-            BoneWorldToScreen = SDK.WorldToScreen(Entity.getBonePosition(6), Matrix)
-            
-            if (BoneWorldToScreen.x > 0 and BoneWorldToScreen.y > 0):
-                Distance = SDK.getDistanceFromCenter(BoneWorldToScreen, Fov)
+        bone_screen_pos = SDK.WorldToScreen(entity.getBonePosition(6), view_matrix)
+        
+        if bone_screen_pos.x > 0 and bone_screen_pos.y > 0:
+            distance = SDK.getDistanceFromCenter(bone_screen_pos, Fov)
+            if distance > best_distance and distance > 0:
+                best_entity = entity
+                best_distance = distance
 
-                if (OldDistance < Distance and Distance > 0):
-                    BestEntity = Entity
-                    OldDistance = Distance
-
-    return BestEntity
+    return best_entity
 
 
-def getBestBone(Entity: csEntity):
-    OldDistance = -9999
-    BestBone = 6
+def getBestBone(entity: csEntity):
+    """Find the most optimal bone to target"""
+    best_distance = float('-inf')
+    best_bone = 6
+    view_matrix = SDK.getViewMatrix()
 
-    Matrix = SDK.getViewMatrix()
+    for bone in GameVar.BoneList:
+        bone_screen_pos = SDK.WorldToScreen(entity.getBonePosition(bone), view_matrix)
 
-    for Bone in GameVar.BoneList:
-        BoneWorldToScreen = SDK.WorldToScreen(Entity.getBonePosition(Bone), Matrix)
+        if bone_screen_pos.x > 0 and bone_screen_pos.y > 0:
+            distance = SDK.getDistanceFromCenter(bone_screen_pos, 360)
+            if distance > best_distance and distance > 0:
+                best_bone = bone
+                best_distance = distance
 
-        if (BoneWorldToScreen.x > 0 and BoneWorldToScreen.y > 0):
-            Distance = SDK.getDistanceFromCenter(BoneWorldToScreen, 360)
-
-            if (OldDistance < Distance and Distance > 0):
-                BestBone = Bone
-                OldDistance = Distance
-
-    return BestBone
+    return best_bone
 
 
 def Function():
-    Entity = csEntity(0)
+    """Main aimbot function"""
+    target_entity = csEntity(0)
 
-    while (AimBotStatus):
-        if (Game.WindowIsOpen()):
-            if (MaxShot > 0):
-                if (GameVar.LocalPlayer.getShotFired() >= MaxShot):
-                    continue
-            
-            if (Game.KeyStatus(VirtualKey) and GameVar.LocalPlayer.Alive and (GameVar.LocalPlayer.WeaponCattegory != WEAPON_KNIFE and GameVar.LocalPlayer.WeaponCattegory != WEAPON_BOMB)):
-                if (Entity.Player == 0 or Entity.getHealth() <= 0):
-                    Entity = getBestTarget()
+    while AimBotStatus:
+        if not Game.WindowIsOpen():
+            time.sleep(0.01)
+            continue
 
-                if (Entity.Valid()):
-                    EntityBonePosition = Entity.getBonePosition(getBestBone(Entity) if (Bone == -1) else Bone)
+        # Check shot limit
+        if MaxShot > 0 and GameVar.LocalPlayer.getShotFired() >= MaxShot:
+            continue
+        
+        # Check if aimbot should be active
+        if (Game.KeyStatus(VirtualKey) and 
+            GameVar.LocalPlayer.Alive and 
+            GameVar.LocalPlayer.WeaponCattegory not in [WEAPON_KNIFE, WEAPON_BOMB]):
 
-                    Matrix = SDK.getViewMatrix()
-                    BonePositionWTS = SDK.WorldToScreen(EntityBonePosition, Matrix)
+            # Get new target if needed
+            if target_entity.Player == 0 or target_entity.getHealth() <= 0:
+                target_entity = getBestTarget()
 
-                    if (BonePositionWTS.x > 0 and BonePositionWTS.y > 0):
-                        MousePosition = Vector2()
+            if target_entity.Valid():
+                # Get target bone position
+                target_bone = getBestBone(target_entity) if Bone == -1 else Bone
+                bone_position = target_entity.getBonePosition(target_bone)
 
-                        MousePosition.x = BonePositionWTS.x - (GameVar.WindowScreen.x / 2)
-                        MousePosition.y = BonePositionWTS.y - (GameVar.WindowScreen.y / 2)
+                # Convert to screen coordinates
+                view_matrix = SDK.getViewMatrix()
+                screen_pos = SDK.WorldToScreen(bone_position, view_matrix)
 
-                        MoveMouseSmooth(MousePosition.x, MousePosition.y, Smooth)
+                if screen_pos.x > 0 and screen_pos.y > 0:
+                    # Calculate mouse movement
+                    mouse_delta = Vector2()
+                    mouse_delta.x = screen_pos.x - (GameVar.WindowScreen.x / 2)
+                    mouse_delta.y = screen_pos.y - (GameVar.WindowScreen.y / 2)
 
+                    MoveMouseSmooth(mouse_delta.x, mouse_delta.y, Smooth)
 
-            else:
-                Entity.Player = 0
+        else:
+            target_entity.Player = 0
 
         time.sleep(0.01)
