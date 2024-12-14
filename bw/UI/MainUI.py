@@ -1,13 +1,14 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
-## from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QColorDialog
 
+# Import UI windows
 import UI.VisualUI as VisualWindow
 import UI.AimAsistUI as AiBotWindow
 import UI.AntiAimAsistUI as AntiAimWindow
 import UI.TriggerBotUI as TriggerBotWindow
 import UI.AutoPistolUI as AutoPistolWindow
 
+# Import cheat functions
 import Function.Visual as Visual
 import Function.AimBot as AimBot
 import Function.AntiAim as AntiAim
@@ -16,9 +17,12 @@ import Function.AutoPistol as AutoPistol
 
 class Ui_Window(object):
     def setupUi(self, Window):
+        # Main window setup
         Window.setObjectName("Window")
         Window.setWindowModality(QtCore.Qt.NonModal)
         Window.resize(943, 368)
+        
+        # Background setup
         self.Background = QtWidgets.QLabel(Window)
         self.Background.setGeometry(QtCore.QRect(0, 0, 951, 402))
         self.Background.setAutoFillBackground(False)
@@ -28,6 +32,8 @@ class Ui_Window(object):
 "color: rgb(30, 30, 35);")
         self.Background.setText("")
         self.Background.setObjectName("Background")
+        
+        # Title panel setup
         self.titlePanel = QtWidgets.QLabel(Window)
         self.titlePanel.setGeometry(QtCore.QRect(0, 0, 851, 23))
         self.titlePanel.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -36,6 +42,8 @@ class Ui_Window(object):
 "color: rgb(245, 36, 250);\n"
 "padding-left: 1px;")
         self.titlePanel.setObjectName("titlePanel")
+        
+        # Close button setup
         self.closeButton = QtWidgets.QPushButton(Window)
         self.closeButton.setGeometry(QtCore.QRect(915, 0, 25, 23))
         self.closeButton.setCursor(QtGui.QCursor(QtCore.Qt.SizeAllCursor))
@@ -59,6 +67,8 @@ class Ui_Window(object):
         self.closeButton.setIcon(icon)
         self.closeButton.setIconSize(QtCore.QSize(22, 22))
         self.closeButton.setObjectName("closeButton")
+        
+        # Minimize button setup
         self.minimazeButton = QtWidgets.QPushButton(Window)
         self.minimazeButton.setGeometry(QtCore.QRect(855, 0, 25, 23))
         self.minimazeButton.setCursor(QtGui.QCursor(QtCore.Qt.SizeHorCursor))
@@ -82,10 +92,14 @@ class Ui_Window(object):
         self.minimazeButton.setIcon(icon1)
         self.minimazeButton.setIconSize(QtCore.QSize(16, 16))
         self.minimazeButton.setObjectName("minimazeButton")
+        
+        # Visual features section
         self.visualChild = QtWidgets.QWidget(Window)
         self.visualChild.setGeometry(QtCore.QRect(5, 55, 200, 311))
         self.visualChild.setStyleSheet("border: 1px solid rgb(80, 80, 85)")
         self.visualChild.setObjectName("visualChild")
+        
+        # Visual checkbox setup
         self.visualCheckBox = QtWidgets.QCheckBox(self.visualChild)
         self.visualCheckBox.setGeometry(QtCore.QRect(5, 5, 61, 20))
         self.visualCheckBox.setStyleSheet("QCheckBox {\n"
@@ -118,6 +132,8 @@ class Ui_Window(object):
 "background-color:  rgb(232, 65, 24);\n"
 "}")
         self.visualCheckBox.setObjectName("visualCheckBox")
+        
+        # Visual settings button
         self.visualSettingButton = QtWidgets.QPushButton(self.visualChild)
         self.visualSettingButton.setGeometry(QtCore.QRect(175, 5, 20, 20))
         self.visualSettingButton.setStyleSheet("QPushButton{\n"
@@ -138,10 +154,14 @@ class Ui_Window(object):
 "  color: rgb(190, 190, 190);\n"
 "}")
         self.visualSettingButton.setObjectName("visualSettingButton")
+        
+        # Aim assist section
         self.aimAsistChild = QtWidgets.QWidget(Window)
         self.aimAsistChild.setGeometry(QtCore.QRect(210, 55, 200, 311))
         self.aimAsistChild.setStyleSheet("border: 1px solid rgb(80, 80, 85)")
         self.aimAsistChild.setObjectName("aimAsistChild")
+        
+        # Aim assist checkbox
         self.aimAsistCheckBox = QtWidgets.QCheckBox(self.aimAsistChild)
         self.aimAsistCheckBox.setGeometry(QtCore.QRect(5, 5, 81, 20))
         self.aimAsistCheckBox.setStyleSheet("QCheckBox {\n"
@@ -174,6 +194,8 @@ class Ui_Window(object):
 "background-color:  rgb(232, 65, 24);\n"
 "}")
         self.aimAsistCheckBox.setObjectName("aimAsistCheckBox")
+        
+        # Aim assist settings button
         self.aimAsistSettingButton = QtWidgets.QPushButton(self.aimAsistChild)
         self.aimAsistSettingButton.setGeometry(QtCore.QRect(175, 5, 20, 20))
         self.aimAsistSettingButton.setStyleSheet("QPushButton{\n"
@@ -194,6 +216,8 @@ class Ui_Window(object):
 "  color: rgb(190, 190, 190);\n"
 "}")
         self.aimAsistSettingButton.setObjectName("aimAsistSettingButton")
+        
+        # Trigger bot checkbox
         self.triggerBotCheckBox = QtWidgets.QCheckBox(self.aimAsistChild)
         self.triggerBotCheckBox.setGeometry(QtCore.QRect(5, 30, 111, 20))
         self.triggerBotCheckBox.setStyleSheet("QCheckBox {\n"
@@ -226,6 +250,8 @@ class Ui_Window(object):
 "background-color:  rgb(232, 65, 24);\n"
 "}")
         self.triggerBotCheckBox.setObjectName("triggerBotCheckBox")
+        
+        # Trigger bot settings button
         self.triggerBotSettingButton = QtWidgets.QPushButton(self.aimAsistChild)
         self.triggerBotSettingButton.setGeometry(QtCore.QRect(175, 30, 20, 20))
         self.triggerBotSettingButton.setStyleSheet("QPushButton{\n"
@@ -246,10 +272,14 @@ class Ui_Window(object):
 "  color: rgb(190, 190, 190);\n"
 "}")
         self.triggerBotSettingButton.setObjectName("triggerBotSettingButton")
+        
+        # Misc features section
         self.miscChild = QtWidgets.QWidget(Window)
         self.miscChild.setGeometry(QtCore.QRect(415, 55, 200, 311))
         self.miscChild.setStyleSheet("border: 1px solid rgb(80, 80, 85)")
         self.miscChild.setObjectName("miscChild")
+        
+        # Auto pistol checkbox
         self.autoPistolCheckBox = QtWidgets.QCheckBox(self.miscChild)
         self.autoPistolCheckBox.setGeometry(QtCore.QRect(5, 5, 91, 20))
         self.autoPistolCheckBox.setStyleSheet("QCheckBox {\n"
@@ -282,6 +312,8 @@ class Ui_Window(object):
 "background-color:  rgb(232, 65, 24);\n"
 "}")
         self.autoPistolCheckBox.setObjectName("autoPistolCheckBox")
+        
+        # Auto pistol settings button
         self.autoPistolSettingButton = QtWidgets.QPushButton(self.miscChild)
         self.autoPistolSettingButton.setGeometry(QtCore.QRect(175, 5, 20, 20))
         self.autoPistolSettingButton.setStyleSheet("QPushButton{\n"
@@ -302,6 +334,8 @@ class Ui_Window(object):
 "  color: rgb(190, 190, 190);\n"
 "}")
         self.autoPistolSettingButton.setObjectName("autoPistolSettingButton")
+        
+        # Bunny hop checkbox
         self.bunnyHopCheckBox = QtWidgets.QCheckBox(self.miscChild)
         self.bunnyHopCheckBox.setGeometry(QtCore.QRect(5, 30, 91, 20))
         self.bunnyHopCheckBox.setStyleSheet("QCheckBox {\n"
@@ -334,6 +368,8 @@ class Ui_Window(object):
 "background-color:  rgb(232, 65, 24);\n"
 "}")
         self.bunnyHopCheckBox.setObjectName("bunnyHopCheckBox")
+        
+        # Question button setup
         self.questionButton = QtWidgets.QPushButton(Window)
         self.questionButton.setGeometry(QtCore.QRect(885, 0, 25, 23))
         self.questionButton.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
@@ -357,6 +393,8 @@ class Ui_Window(object):
         self.questionButton.setIcon(icon2)
         self.questionButton.setIconSize(QtCore.QSize(16, 16))
         self.questionButton.setObjectName("questionButton")
+        
+        # Section title panels
         self.titlePanel_2 = QtWidgets.QLabel(Window)
         self.titlePanel_2.setGeometry(QtCore.QRect(0, 30, 951, 23))
         self.titlePanel_2.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -365,10 +403,14 @@ class Ui_Window(object):
 "color: rgb(45, 246, 250);\n"
 "padding-left: 1px;")
         self.titlePanel_2.setObjectName("titlePanel_2")
+        
+        # Rage assist section
         self.rageAsistChild = QtWidgets.QWidget(Window)
         self.rageAsistChild.setGeometry(QtCore.QRect(620, 55, 200, 311))
         self.rageAsistChild.setStyleSheet("border: 1px solid rgb(80, 80, 85)")
         self.rageAsistChild.setObjectName("rageAsistChild")
+        
+        # Anti aim checkbox
         self.antiAimCheckBox = QtWidgets.QCheckBox(self.rageAsistChild)
         self.antiAimCheckBox.setGeometry(QtCore.QRect(5, 5, 81, 20))
         self.antiAimCheckBox.setStyleSheet("QCheckBox {\n"
@@ -401,6 +443,8 @@ class Ui_Window(object):
 "background-color:  rgb(232, 65, 24);\n"
 "}")
         self.antiAimCheckBox.setObjectName("antiAimCheckBox")
+        
+        # Decorative title panels
         self.titlePanel_3 = QtWidgets.QLabel(Window)
         self.titlePanel_3.setGeometry(QtCore.QRect(820, 50, 121, 23))
         self.titlePanel_3.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -409,6 +453,7 @@ class Ui_Window(object):
 "color: rgb(255, 0, 0);\n"
 "padding-left: 1px;")
         self.titlePanel_3.setObjectName("titlePanel_3")
+        
         self.titlePanel_4 = QtWidgets.QLabel(Window)
         self.titlePanel_4.setGeometry(QtCore.QRect(820, 70, 121, 23))
         self.titlePanel_4.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -417,6 +462,7 @@ class Ui_Window(object):
 "color: rgb(255, 165, 0);\n"
 "padding-left: 1px;")
         self.titlePanel_4.setObjectName("titlePanel_4")
+        
         self.titlePanel_5 = QtWidgets.QLabel(Window)
         self.titlePanel_5.setGeometry(QtCore.QRect(820, 90, 121, 23))
         self.titlePanel_5.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -425,6 +471,7 @@ class Ui_Window(object):
 "color: rgb(255, 255, 0);\n"
 "padding-left: 1px;")
         self.titlePanel_5.setObjectName("titlePanel_5")
+        
         self.titlePanel_6 = QtWidgets.QLabel(Window)
         self.titlePanel_6.setGeometry(QtCore.QRect(820, 110, 121, 23))
         self.titlePanel_6.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -433,6 +480,7 @@ class Ui_Window(object):
 "color: rgb(0, 255, 20);\n"
 "padding-left: 1px;")
         self.titlePanel_6.setObjectName("titlePanel_6")
+        
         self.titlePanel_7 = QtWidgets.QLabel(Window)
         self.titlePanel_7.setGeometry(QtCore.QRect(820, 130, 121, 23))
         self.titlePanel_7.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -441,6 +489,7 @@ class Ui_Window(object):
 "color: rgb(0, 255, 255);\n"
 "padding-left: 1px;")
         self.titlePanel_7.setObjectName("titlePanel_7")
+        
         self.titlePanel_8 = QtWidgets.QLabel(Window)
         self.titlePanel_8.setGeometry(QtCore.QRect(820, 150, 121, 23))
         self.titlePanel_8.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -449,6 +498,7 @@ class Ui_Window(object):
 "color: rgb(0, 100, 255);\n"
 "padding-left: 1px;")
         self.titlePanel_8.setObjectName("titlePanel_8")
+        
         self.titlePanel_9 = QtWidgets.QLabel(Window)
         self.titlePanel_9.setGeometry(QtCore.QRect(820, 170, 121, 23))
         self.titlePanel_9.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -457,6 +507,7 @@ class Ui_Window(object):
 "color: rgb(139, 0, 255);\n"
 "padding-left: 1px;")
         self.titlePanel_9.setObjectName("titlePanel_9")
+        
         self.titlePanel_19 = QtWidgets.QLabel(Window)
         self.titlePanel_19.setGeometry(QtCore.QRect(820, 340, 121, 23))
         self.titlePanel_19.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -465,6 +516,7 @@ class Ui_Window(object):
 "color: rgb(33, 1, 0);\n"
 "padding-left: 1px;")
         self.titlePanel_19.setObjectName("titlePanel_19")
+        
         self.titlePanel_10 = QtWidgets.QLabel(Window)
         self.titlePanel_10.setGeometry(QtCore.QRect(820, 190, 121, 23))
         self.titlePanel_10.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -473,6 +525,7 @@ class Ui_Window(object):
 "color: rgb(139, 0, 255);\n"
 "padding-left: 1px;")
         self.titlePanel_10.setObjectName("titlePanel_10")
+        
         self.titlePanel_11 = QtWidgets.QLabel(Window)
         self.titlePanel_11.setGeometry(QtCore.QRect(820, 210, 121, 23))
         self.titlePanel_11.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -481,6 +534,7 @@ class Ui_Window(object):
 "color: rgb(0, 100, 255);\n"
 "padding-left: 1px;")
         self.titlePanel_11.setObjectName("titlePanel_11")
+        
         self.titlePanel_12 = QtWidgets.QLabel(Window)
         self.titlePanel_12.setGeometry(QtCore.QRect(820, 230, 121, 23))
         self.titlePanel_12.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -489,6 +543,7 @@ class Ui_Window(object):
 "color: rgb(0, 255, 255);\n"
 "padding-left: 1px;")
         self.titlePanel_12.setObjectName("titlePanel_12")
+        
         self.titlePanel_13 = QtWidgets.QLabel(Window)
         self.titlePanel_13.setGeometry(QtCore.QRect(820, 250, 121, 23))
         self.titlePanel_13.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -497,6 +552,7 @@ class Ui_Window(object):
 "color: rgb(0, 255, 20);\n"
 "padding-left: 1px;")
         self.titlePanel_13.setObjectName("titlePanel_13")
+        
         self.titlePanel_14 = QtWidgets.QLabel(Window)
         self.titlePanel_14.setGeometry(QtCore.QRect(820, 270, 121, 23))
         self.titlePanel_14.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -505,6 +561,7 @@ class Ui_Window(object):
 "color: rgb(255, 255, 0);\n"
 "padding-left: 1px;")
         self.titlePanel_14.setObjectName("titlePanel_14")
+        
         self.titlePanel_15 = QtWidgets.QLabel(Window)
         self.titlePanel_15.setGeometry(QtCore.QRect(820, 290, 121, 23))
         self.titlePanel_15.setStyleSheet("background-color: rgb(50, 50, 55);\n"
@@ -513,6 +570,7 @@ class Ui_Window(object):
 "color: rgb(255, 165, 0);\n"
 "padding-left: 1px;")
         self.titlePanel_15.setObjectName("titlePanel_15")
+        
         self.titlePanel_16 = QtWidgets.QLabel(Window)
         self.titlePanel_16.setGeometry(QtCore.QRect(820, 310, 121, 23))
         self.titlePanel_16.setStyleSheet("background-color: rgb(50, 50, 55);\n"
