@@ -14,6 +14,7 @@ from SDK.Render import *
 import Function.AimBot as AimBot
 
 
+# Visual settings
 VisualStatus = False
 BoxESPStatus = True
 HealthStatus = True
@@ -21,105 +22,146 @@ WeaponStatus = True
 LineStatus = False
 TeamCheck = True
 
+# Crosshair settings
 CrosshairStatus = False
 CrosshairSize = 6
 
+# Bomb ESP settings
 BombESPStatus = True
 
+# ESP colors
 BoxESPColor = "#00aaff"
-LineColor = "#ff0000"
+LineColor = "#ff0000" 
 CrosshairColor = "#ffffff"
 
 
+def draw_player_esp(overlay, entity, matrix):
+    """Draw ESP elements for a player entity"""
+    feet_pos = entity.getOriginPosition()
+    head_pos = entity.getHeadPosition()
+
+    feet = SDK.WorldToScreen(feet_pos, matrix)
+    head = SDK.WorldToScreen(head_pos, matrix)
+
+    if not ((head.x > 0 and head.y > 0) and (feet.x > 0 and feet.y > 0)):
+        return
+
+    height = feet.y - head.y
+    width = height / 2
+
+    # Draw bounding box
+    if BoxESPStatus:
+        overlay.DrawRect(head.x - width/2, head.y, head.x + width/2, head.y + height, BoxESPColor)
+
+    # Draw health and armor bars
+    if HealthStatus:
+        health = entity.getHealth()
+        armor = entity.getArmor()
+        
+        overlay.DrawFilledRectangle(
+            head.x - width/2 - (height/9), head.y,
+            width/10, height, abs(health * height/100),
+            overlay.RGBtoHEX(255, 0, 0)
+        )
+
+        if armor > 0:
+            overlay.DrawFilledRectangle(
+                head.x + width/2 + (height/11), head.y,
+                width/10, height, abs(armor * height/100),
+                overlay.RGBtoHEX(0, 168, 255)
+            )
+
+    # Draw weapon info
+    if WeaponStatus:
+        draw_weapon_info(overlay, entity, feet, height)
+
+    # Draw line to player
+    if LineStatus:
+        overlay.DrawLine(GameVar.WindowScreen.x/2, 0, head.x, head.y - (height/11), LineColor)
+
+
+def draw_weapon_info(overlay, entity, feet_pos, height):
+    """Draw weapon name and ammo info"""
+    weapon_id = entity.getWeaponID()
+    weapon_category = Weapon.getWeaponCategory(weapon_id)
+    
+    if weapon_category not in [WEAPON_KNIFE, WEAPON_GRENADE, WEAPON_BOMB, WEAPON_TASER]:
+        ammo = entity.getAmmo()
+        scoped = entity.getScoped()
+        
+        weapon_text = f"{Weapon.getWeaponName(weapon_id)} ({ammo})"
+        if scoped:
+            weapon_text += " (SCOPED)"
+    else:
+        weapon_text = Weapon.getWeaponName(weapon_id)
+        
+    overlay.DrawText(feet_pos.x, feet_pos.y + (height/10), weapon_text, overlay.RGBtoHEX(255, 255, 255))
+
+
+def draw_bomb_esp(overlay):
+    """Draw bomb timer and defuse info"""
+    if not (BombESPStatus and csBomb.isPlanted()):
+        return
+        
+    bomb_pos = csBomb.getPositionWTS()
+    if not (bomb_pos.x > 0 and bomb_pos.y > 0):
+        return
+        
+    bomb_time = csBomb.getBombTime()
+    defuse_time = csBomb.getDefuseTime()
+
+    if defuse_time > 0:
+        text = f"BOMB ({round(bomb_time, 2)} | {round(defuse_time, 2)})"
+    else:
+        text = f"BOMB ({round(bomb_time, 2)})"
+        
+    overlay.DrawText(bomb_pos.x, bomb_pos.y, text, overlay.RGBtoHEX(255, 255, 254))
+
+
+def draw_crosshair(overlay):
+    """Draw custom crosshair for sniper weapons"""
+    if not (CrosshairStatus and GameVar.LocalPlayer.Alive):
+        return
+        
+    if GameVar.LocalPlayer.WeaponCattegory in [WEAPON_SNIPER, WEAPON_AUTOSNIPER]:
+        center_x = GameVar.WindowScreen.x/2
+        center_y = GameVar.WindowScreen.y/2
+        
+        overlay.DrawLine(center_x, center_y - CrosshairSize,
+                        center_x, center_y + CrosshairSize + 1, CrosshairColor)
+        overlay.DrawLine(center_x - CrosshairSize, center_y,
+                        center_x + CrosshairSize + 1, center_y, CrosshairColor)
+
+
 def Function():
-    GameOverlay = Overlay("Box ESP")
+    """Main ESP rendering loop"""
+    game_overlay = Overlay("Box ESP")
 
-    while (VisualStatus):
-        GameOverlay.BeginRender()
+    while VisualStatus:
+        game_overlay.BeginRender()
 
-        if (Game.WindowIsOpen()):
+        if Game.WindowIsOpen():
+            matrix = SDK.getViewMatrix()
 
-            for Entity in GameVar.EntityList:
-                if (TeamCheck and Entity.getTeam() == GameVar.LocalPlayer.Team):
+            # Draw player ESP
+            for entity in GameVar.EntityList:
+                if TeamCheck and entity.getTeam() == GameVar.LocalPlayer.Team:
                     continue
-                
-                FeetPosition = Entity.getOriginPosition()
-                HeadPosition = Entity.getHeadPosition()
+                draw_player_esp(game_overlay, entity, matrix)
 
-                Matrix = SDK.getViewMatrix()
+            # Draw bomb ESP
+            draw_bomb_esp(game_overlay)
 
-                Feet = SDK.WorldToScreen(FeetPosition, Matrix)
-                Head = SDK.WorldToScreen(HeadPosition, Matrix)
+            # Draw aim FOV
+            if AimBot.AimBotFOVStatus and GameVar.LocalPlayer.Alive:
+                game_overlay.DrawCircle(GameVar.WindowScreen.x/2,
+                                      GameVar.WindowScreen.y/2,
+                                      AimBot.Fov, AimBot.AimFOVColor)
 
-                if ((Head.x > 0 and Head.y > 0) and (Feet.x > 0 and Feet.y > 0)):
-                    Height = Feet.y - Head.y
-                    Width = Height / 2
+            # Draw custom crosshair
+            draw_crosshair(game_overlay)
 
-
-                    if (BoxESPStatus):
-                        GameOverlay.DrawRect(Head.x - Width / 2, Head.y, Head.x + Width / 2, Head.y + Height, BoxESPColor)
-                        #GameOverlay.DrawRectangle(Head.x - Width / 2, Head.y, Width, Height, GameOverlay.RGBtoHEX(255, 255, 0))
-
-
-                    if (HealthStatus):
-                        Health = Entity.getHealth()
-                        Armor = Entity.getArmor()
-
-                        GameOverlay.DrawFilledRectangle(Head.x - Width / 2 - (Height / 9), Head.y, Width / 10, Height,abs(Health * Height / 100), GameOverlay.RGBtoHEX(255, 0, 0))
-
-                        if (Armor > 0):
-                            GameOverlay.DrawFilledRectangle(Head.x + Width / 2 + (Height / 11), Head.y, Width / 10, Height,abs(Armor * Height / 100), GameOverlay.RGBtoHEX(0, 168, 255))
-
-
-                    if (WeaponStatus):
-                        WeaponID = Entity.getWeaponID()
-                        WeaponCategory = Weapon.getWeaponCategory(WeaponID)
-
-                        if ((WeaponCategory != WEAPON_KNIFE) and (WeaponCategory != WEAPON_GRENADE) and (WeaponCategory != WEAPON_BOMB) and (WeaponCategory != WEAPON_TASER)):
-                            Ammo = Entity.getAmmo()
-                            Scopted = Entity.getScoped()
-
-                            if (Scopted):
-                                GameOverlay.DrawText(Feet.x, Feet.y + (Height / 10), f"{Weapon.getWeaponName(WeaponID)} ({Ammo}) (SCOPED)", GameOverlay.RGBtoHEX(255, 255, 255))
-                            
-                            else:
-                                GameOverlay.DrawText(Feet.x, Feet.y + (Height / 10), f"{Weapon.getWeaponName(WeaponID)} ({Ammo})", GameOverlay.RGBtoHEX(255, 255, 255))
-                        
-                        else:
-                            GameOverlay.DrawText(Feet.x, Feet.y + (Height / 10), f"{Weapon.getWeaponName(WeaponID)}", GameOverlay.RGBtoHEX(255, 255, 255))
-
-
-                    if (LineStatus):
-                        GameOverlay.DrawLine(GameVar.WindowScreen.x / 2, 0 , Head.x, Head.y - (Height / 11), LineColor)
-
-
-            if (BombESPStatus):        
-                if (csBomb.isPlanted()):
-                    BombPosition = csBomb.getPositionWTS()
-                    BombTime = csBomb.getBombTime()
-                    DefuseTime = csBomb.getDefuseTime()
-
-                    if (BombPosition.x > 0 and BombPosition.y > 0):
-
-                        if (DefuseTime > 0):
-                            GameOverlay.DrawText(BombPosition.x, BombPosition.y, f"BOMB ({round(BombTime, 2)} | {round(DefuseTime, 2)})", GameOverlay.RGBtoHEX(255, 255, 254))
-
-                        else:
-                            GameOverlay.DrawText(BombPosition.x, BombPosition.y, f"BOMB ({round(BombTime, 2)})", GameOverlay.RGBtoHEX(255, 255, 254))
-
-
-            if (AimBot.AimBotFOVStatus):
-                if (GameVar.LocalPlayer.Alive):
-                    GameOverlay.DrawCircle(GameVar.WindowScreen.x / 2, GameVar.WindowScreen.y / 2, AimBot.Fov, AimBot.AimFOVColor)
-
-
-            if (CrosshairStatus):
-                if ((GameVar.LocalPlayer.WeaponCattegory == WEAPON_SNIPER or GameVar.LocalPlayer.WeaponCattegory == WEAPON_AUTOSNIPER)):
-                    GameOverlay.DrawLine(GameVar.WindowScreen.x / 2, GameVar.WindowScreen.y / 2 - CrosshairSize, GameVar.WindowScreen.x / 2, GameVar.WindowScreen.y / 2 + CrosshairSize + 1, CrosshairColor)
-                    GameOverlay.DrawLine(GameVar.WindowScreen.x / 2 - CrosshairSize, GameVar.WindowScreen.y / 2, GameVar.WindowScreen.x / 2 + CrosshairSize + 1, GameVar.WindowScreen.y / 2, CrosshairColor)
-
-
-        GameOverlay.EndRender()
+        game_overlay.EndRender()
         time.sleep(0.01)
 
-    GameOverlay.Destory()
+    game_overlay.Destory()
