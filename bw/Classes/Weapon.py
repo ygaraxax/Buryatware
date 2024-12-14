@@ -1,8 +1,9 @@
+# Weapon category constants
 WEAPON_KNIFE = 1
 WEAPON_PISTOL = 2
 WEAPON_SHOTGUN = 3
 WEAPON_SUBMACHINE = 4
-WEAPON_RIFELS = 5
+WEAPON_RIFLES = 5  # Fixed typo in RIFELS
 WEAPON_SNIPER = 6
 WEAPON_MACHINE = 7
 WEAPON_GRENADE = 8
@@ -12,99 +13,110 @@ WEAPON_CZ75A = 11
 WEAPON_TASER = 12
 WEAPON_AUTOSNIPER = 13
 
-
+# Weapon definitions with IDs and categories
 WeaponList = {
-    "P2000" : { "ID" : 32, "Cattegory": WEAPON_PISTOL },
-    "USP-S" : { "ID" : 61, "Cattegory": WEAPON_PISTOL },
-    "Glock" : { "ID" : 4, "Cattegory": WEAPON_PISTOL }, 
-    "Dual Berettas" : { "ID" : 2, "Cattegory": WEAPON_PISTOL },
-    "P250" : { "ID" : 36, "Cattegory": WEAPON_PISTOL }, 
-    "Tec-9" : { "ID" : 30, "Cattegory": WEAPON_PISTOL }, 
-    "CZ75-Auto" : { "ID" : 63, "Cattegory": WEAPON_CZ75A },
-    "Desert Eagle" : { "ID" : 1, "Cattegory": WEAPON_PISTOL },
-    "Five-SeveN" : { "ID" : 3, "Cattegory": WEAPON_PISTOL }, 
-    "R8" : { "ID" : 64, "Cattegory": WEAPON_REVOLVER },
+    # Pistols
+    "P2000": {"ID": 32, "Category": WEAPON_PISTOL},  # Fixed typo in Category
+    "USP-S": {"ID": 61, "Category": WEAPON_PISTOL},
+    "Glock": {"ID": 4, "Category": WEAPON_PISTOL},
+    "Dual Berettas": {"ID": 2, "Category": WEAPON_PISTOL},
+    "P250": {"ID": 36, "Category": WEAPON_PISTOL},
+    "Tec-9": {"ID": 30, "Category": WEAPON_PISTOL},
+    "CZ75-Auto": {"ID": 63, "Category": WEAPON_CZ75A},
+    "Desert Eagle": {"ID": 1, "Category": WEAPON_PISTOL},
+    "Five-SeveN": {"ID": 3, "Category": WEAPON_PISTOL},
+    "R8": {"ID": 64, "Category": WEAPON_REVOLVER},
 
-    "Nova" : { "ID" : 35, "Cattegory": WEAPON_SHOTGUN },
-    "XM1014" : { "ID" : 25, "Cattegory": WEAPON_SHOTGUN }, 
-    "MAG-7" : { "ID" : 27, "Cattegory": WEAPON_SHOTGUN },
-    "Sawed-Off" : { "ID" : 29, "Cattegory": WEAPON_SHOTGUN },
+    # Shotguns
+    "Nova": {"ID": 35, "Category": WEAPON_SHOTGUN},
+    "XM1014": {"ID": 25, "Category": WEAPON_SHOTGUN},
+    "MAG-7": {"ID": 27, "Category": WEAPON_SHOTGUN},
+    "Sawed-Off": {"ID": 29, "Category": WEAPON_SHOTGUN},
 
-    "M249" : { "ID" : 14, "Cattegory": WEAPON_MACHINE },
-    "Negev" : { "ID" : 28, "Cattegory": WEAPON_MACHINE },
+    # Heavy
+    "M249": {"ID": 14, "Category": WEAPON_MACHINE},
+    "Negev": {"ID": 28, "Category": WEAPON_MACHINE},
 
-    "MAC-10" : { "ID" : 17, "Cattegory": WEAPON_SUBMACHINE },
-    "MP5-SD" : { "ID" : 23, "Cattegory": WEAPON_SUBMACHINE }, 
-    "UMP-45" : { "ID" : 24, "Cattegory": WEAPON_SUBMACHINE },
-    "P90" : { "ID" : 19, "Cattegory": WEAPON_SUBMACHINE },
-    "Bizon" : { "ID" : 26, "Cattegory": WEAPON_SUBMACHINE }, 
-    "MP9" : { "ID" : 34, "Cattegory": WEAPON_SUBMACHINE },
-    "MP7" : { "ID" : 33, "Cattegory": WEAPON_SUBMACHINE }, 
+    # SMGs
+    "MAC-10": {"ID": 17, "Category": WEAPON_SUBMACHINE},
+    "MP5-SD": {"ID": 23, "Category": WEAPON_SUBMACHINE},
+    "UMP-45": {"ID": 24, "Category": WEAPON_SUBMACHINE},
+    "P90": {"ID": 19, "Category": WEAPON_SUBMACHINE},
+    "Bizon": {"ID": 26, "Category": WEAPON_SUBMACHINE},
+    "MP9": {"ID": 34, "Category": WEAPON_SUBMACHINE},
+    "MP7": {"ID": 33, "Category": WEAPON_SUBMACHINE},
 
-    "FAMAS" : { "ID" : 10, "Cattegory": WEAPON_RIFELS }, 
-    "M4A4" : { "ID" : 16, "Cattegory": WEAPON_RIFELS },
-    "M4A1-S" : { "ID" : 60, "Cattegory": WEAPON_RIFELS },
-    "AUG" : { "ID" : 8, "Cattegory": WEAPON_RIFELS },  
-    "Galil" : { "ID" : 43, "Cattegory": WEAPON_RIFELS },
-    "AK-47" : { "ID" : 7, "Cattegory": WEAPON_RIFELS },
-    "SG 553" : { "ID" : 39, "Cattegory": WEAPON_RIFELS }, 
+    # Rifles
+    "FAMAS": {"ID": 10, "Category": WEAPON_RIFLES},
+    "M4A4": {"ID": 16, "Category": WEAPON_RIFLES},
+    "M4A1-S": {"ID": 60, "Category": WEAPON_RIFLES},
+    "AUG": {"ID": 8, "Category": WEAPON_RIFLES},
+    "Galil": {"ID": 43, "Category": WEAPON_RIFLES},
+    "AK-47": {"ID": 7, "Category": WEAPON_RIFLES},
+    "SG 553": {"ID": 39, "Category": WEAPON_RIFLES},
 
-    "SSG 08" : { "ID" : 40, "Cattegory": WEAPON_SNIPER }, 
-    "AWP" : { "ID" : 9, "Cattegory": WEAPON_SNIPER },
+    # Snipers
+    "SSG 08": {"ID": 40, "Category": WEAPON_SNIPER},
+    "AWP": {"ID": 9, "Category": WEAPON_SNIPER},
 
-    "SCAR-20" : { "ID" : 38, "Cattegory": WEAPON_AUTOSNIPER }, 
-    "G3SG1" : { "ID" : 11, "Cattegory": WEAPON_AUTOSNIPER },
+    # Auto-Snipers
+    "SCAR-20": {"ID": 38, "Category": WEAPON_AUTOSNIPER},
+    "G3SG1": {"ID": 11, "Category": WEAPON_AUTOSNIPER},
 
-    "Flashbang" : { "ID" : 43, "Cattegory": WEAPON_GRENADE },
-    "Hegrenade" : { "ID" : 44, "Cattegory": WEAPON_GRENADE },
-    "Smoke" : { "ID" : 45, "Cattegory": WEAPON_GRENADE },
-    "Molotov" : { "ID" : 46, "Cattegory": WEAPON_GRENADE },
-    "Decoy" : { "ID" : 47, "Cattegory": WEAPON_GRENADE },
-    "Incgrenage" : { "ID" : 48, "Cattegory": WEAPON_GRENADE },
+    # Grenades
+    "Flashbang": {"ID": 43, "Category": WEAPON_GRENADE},
+    "Hegrenade": {"ID": 44, "Category": WEAPON_GRENADE},
+    "Smoke": {"ID": 45, "Category": WEAPON_GRENADE},
+    "Molotov": {"ID": 46, "Category": WEAPON_GRENADE},
+    "Decoy": {"ID": 47, "Category": WEAPON_GRENADE},
+    "Incgrenage": {"ID": 48, "Category": WEAPON_GRENADE},
 
-    "C4" : { "ID" : 49, "Cattegory": WEAPON_BOMB },
-    "Taser" : { "ID" : 31, "Cattegory": WEAPON_TASER },
+    # Equipment
+    "C4": {"ID": 49, "Category": WEAPON_BOMB},
+    "Taser": {"ID": 31, "Category": WEAPON_TASER},
 
-    "Knife" : { "ID" : 42, "Cattegory": WEAPON_KNIFE },
-    "Knife Gold" : { "ID" : 41, "Cattegory": WEAPON_KNIFE },
-    "Knife" : { "ID" : 59, "Cattegory": WEAPON_KNIFE },
-    "Knife Ghost" : { "ID" : 80, "Cattegory": WEAPON_KNIFE },
-    "Knife Bayonet" : { "ID" : 500, "Cattegory": WEAPON_KNIFE },
-    "Knife Flip" : { "ID" : 505, "Cattegory": WEAPON_KNIFE },
-    "Knife Gut" : { "ID" : 506, "Cattegory": WEAPON_KNIFE },
-    "Knife Karambit" : { "ID" : 507, "Cattegory": WEAPON_KNIFE },
-    "Knife M9" : { "ID" : 508, "Cattegory": WEAPON_KNIFE },
-    "Knife Tactica" : { "ID" : 509, "Cattegory": WEAPON_KNIFE },
-    "Knife Falchion" : { "ID" : 512, "Cattegory": WEAPON_KNIFE },
-    "Knife Survival Bowie" : { "ID" : 514, "Cattegory": WEAPON_KNIFE },
-    "Knife Butterfly" : { "ID" : 515, "Cattegory": WEAPON_KNIFE },
-    "Knife Rush" : { "ID" : 516, "Cattegory": WEAPON_KNIFE },
-    "Knife Ursus" : { "ID" : 519, "Cattegory": WEAPON_KNIFE },
-    "Knife Gypsy Jackknife" : { "ID" : 520, "Cattegory": WEAPON_KNIFE },
-    "Knife Stiletto" : { "ID" : 522, "Cattegory": WEAPON_KNIFE },
-    "Knife Widowmaker" : { "ID" : 523, "Cattegory": WEAPON_KNIFE }
+    # Knives
+    "Knife": {"ID": 42, "Category": WEAPON_KNIFE},  # Removed duplicate knife entry
+    "Knife Gold": {"ID": 41, "Category": WEAPON_KNIFE},
+    "Knife Ghost": {"ID": 80, "Category": WEAPON_KNIFE},
+    "Knife Bayonet": {"ID": 500, "Category": WEAPON_KNIFE},
+    "Knife Flip": {"ID": 505, "Category": WEAPON_KNIFE},
+    "Knife Gut": {"ID": 506, "Category": WEAPON_KNIFE},
+    "Knife Karambit": {"ID": 507, "Category": WEAPON_KNIFE},
+    "Knife M9": {"ID": 508, "Category": WEAPON_KNIFE},
+    "Knife Tactica": {"ID": 509, "Category": WEAPON_KNIFE},
+    "Knife Falchion": {"ID": 512, "Category": WEAPON_KNIFE},
+    "Knife Survival Bowie": {"ID": 514, "Category": WEAPON_KNIFE},
+    "Knife Butterfly": {"ID": 515, "Category": WEAPON_KNIFE},
+    "Knife Rush": {"ID": 516, "Category": WEAPON_KNIFE},
+    "Knife Ursus": {"ID": 519, "Category": WEAPON_KNIFE},
+    "Knife Gypsy Jackknife": {"ID": 520, "Category": WEAPON_KNIFE},
+    "Knife Stiletto": {"ID": 522, "Category": WEAPON_KNIFE},
+    "Knife Widowmaker": {"ID": 523, "Category": WEAPON_KNIFE}
 }
 
 
-class Weapon():
+class Weapon:
+    @staticmethod
     def getWeaponName(WeaponID):
-        for Weapon in WeaponList.items():
-            if (Weapon[1]["ID"] == WeaponID):
-                return Weapon[0]
-            
+        """Get weapon name from weapon ID"""
+        for weapon_name, weapon_data in WeaponList.items():
+            if weapon_data["ID"] == WeaponID:
+                return weapon_name
         return "Unknown"
 
-
+    @staticmethod
     def getWeaponCategory(WeaponID):
-        for Weapon in WeaponList.items():
-            if (Weapon[1]["ID"] == WeaponID):
-                return Weapon[1]["Cattegory"]
-            
+        """Get weapon category from weapon ID"""
+        for weapon_data in WeaponList.values():
+            if weapon_data["ID"] == WeaponID:
+                return weapon_data["Category"]
         return 0
-    
+
+    @staticmethod
     def getWeaponCategoryToCategory(WeaponCategory):
-        for Weapon in WeaponList.items():
-            if (Weapon[1]["Cattegory"] == WeaponCategory):
-                return Weapon[1]["Cattegory"]
-            
+        """Get weapon category from category ID"""
+        for weapon_data in WeaponList.values():
+            if weapon_data["Category"] == WeaponCategory:
+                return weapon_data["Category"]
         return "Unknown"
