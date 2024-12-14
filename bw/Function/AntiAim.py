@@ -11,28 +11,36 @@ from SDK.GameSDK import *
 
 from SDK.Render import *
 
-# Настройки
-RotateLeft = True  # Включить вращение влево
-RotateSpeed = 500000   # Скорость вращения (пиксели)
-AntiAimStatus = False
-AntiAimFOVStatus = False
-TeamCheck = True
+# Anti-Aim Configuration
+ROTATE_LEFT = True  # Enable left rotation
+ROTATE_SPEED = 500000  # Rotation speed in pixels
+SLEEP_TIME = 0.01  # Sleep duration between rotations
 
-Bone = 6
-Fov = 90
-Smooth = 1
-VirtualKey = 6
-MaxShot = 5
+# Aim Configuration  
+AIM_STATUS = False
+AIM_FOV_STATUS = False
+TEAM_CHECK = True
 
-AimFOVColor = "#ffffff"
+# Aim Parameters
+BONE_TARGET = 6
+FOV = 90 
+SMOOTH = 1
+VIRTUAL_KEY = 6
+MAX_SHOTS = 5
+
+AIM_FOV_COLOR = "#ffffff"
 
 
-def Function():
-    while RotateLeft:
+def rotate_continuously():
+    """
+    Main anti-aim function that continuously rotates the view angle
+    while game window is open and local player is alive
+    """
+    while ROTATE_LEFT:
         if Game.WindowIsOpen() and GameVar.LocalPlayer.Alive:
-            # Перемещение мыши влево
-            MoveMouseSmooth(-RotateSpeed, 0, 1)  # Вращение влево по оси X
-        time.sleep(0.01)  # Задержка для уменьшения нагрузки на процессор
+            # Smooth mouse movement to the left on X axis
+            MoveMouseSmooth(-ROTATE_SPEED, 0, 1)
+        time.sleep(SLEEP_TIME)
 
 if __name__ == "__main__":
-    Function()
+    rotate_continuously()
